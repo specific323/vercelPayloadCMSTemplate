@@ -2,6 +2,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import Link from 'next/link'
 
+export const revalidate = 3600
+
 export default async function HomePage() {
   const payload = await getPayload({ config })
 

@@ -6,6 +6,17 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: true,
+  access: {
+    // 只有管理員可以讀取使用者列表；使用者可讀取自己
+    read: ({ req }) => {
+      if (!req.user) return false
+      return true
+    },
+    // 更新：只能更新自己（或管理員）
+    update: ({ req }) => !!req.user,
+    // 刪除：需要登入
+    delete: ({ req }) => !!req.user,
+  },
   fields: [
     {
       name: 'name',

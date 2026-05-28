@@ -3,6 +3,8 @@ import config from '@payload-config'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: '所有文章',
 }
