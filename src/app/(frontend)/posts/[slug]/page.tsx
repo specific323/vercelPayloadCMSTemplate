@@ -67,7 +67,7 @@ export default async function PostPage({ params }: Props) {
       <header style={{ marginBottom: '2rem' }}>
         {post.tags && post.tags.length > 0 && (
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-            {post.tags.map((item, i) => (
+            {post.tags.map((item: { tag?: string | null }, i) => (
               <span key={i} style={{ background: '#eff6ff', color: '#1d4ed8', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 500 }}>
                 {item.tag}
               </span>
