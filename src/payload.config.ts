@@ -25,12 +25,10 @@ export default buildConfig({
   collections: [Users, Posts, Media],
   db: postgresAdapter({
     pool: {
-      // Use unpooled (direct) connection — required for push:true DDL statements
-      // PgBouncer pooled connections don't support DDL (CREATE TABLE etc.)
+      // Use unpooled (direct) connection for migrations and runtime
       connectionString: process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL,
     },
-    // Auto-push schema on startup — creates tables on first deploy
-    push: true,
+    migrationDir: path.resolve(dirname, '../migrations'),
   }),
   editor: lexicalEditor(),
   plugins: [
