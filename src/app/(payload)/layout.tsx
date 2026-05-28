@@ -1,22 +1,32 @@
-import { RootLayout, metadata } from '@payloadcms/next/layouts'
+import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts'
 import config from '@payload-config'
 import { importMap } from './admin/importMap.js'
-import { payloadServerFunction } from './serverFunction.js'
-import type { ServerFunctionClient } from 'payload'
 import React from 'react'
 
-export { metadata }
+export const metadata = {
+  description: 'Payload Admin Panel',
+  title: 'Payload Admin',
+}
 
 type Args = {
   children: React.ReactNode
 }
 
 export default async function Layout({ children }: Args) {
+  const serverFunction = async (args: Parameters<typeof handleServerFunctions>[0]) => {
+    'use server'
+    return handleServerFunctions({
+      ...args,
+      config,
+      importMap,
+    })
+  }
+
   return (
     <RootLayout
       config={config}
       importMap={importMap}
-      serverFunction={payloadServerFunction as unknown as ServerFunctionClient}
+      serverFunction={serverFunction as any}
     >
       {children}
     </RootLayout>
