@@ -27,11 +27,12 @@ export default buildConfig({
     pool: {
       // Neon Vercel integration provides two URLs:
       // DATABASE_URL         → pooled (PgBouncer) for runtime queries
-      // DATABASE_URL_UNPOOLED → direct connection for migrations
+      // DATABASE_URL_UNPOOLED → direct connection for schema operations
       connectionString: process.env.DATABASE_URL,
     },
-    // Use direct (unpooled) connection for migrations to avoid PgBouncer limitations
-    migrationDir: './src/migrations',
+    // Auto-push schema on startup — creates tables on first deploy
+    // For production with existing data, disable this and use migrations instead
+    push: true,
   }),
   editor: lexicalEditor(),
   plugins: [

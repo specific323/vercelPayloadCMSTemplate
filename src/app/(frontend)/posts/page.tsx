@@ -17,7 +17,7 @@ export default async function PostsPage() {
     },
     sort: '-publishedAt',
     limit: 20,
-  })
+  }).catch(() => ({ docs: [], totalDocs: 0 }))
 
   return (
     <div>
