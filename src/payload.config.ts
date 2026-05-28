@@ -25,8 +25,9 @@ export default buildConfig({
   collections: [Users, Posts, Media],
   db: postgresAdapter({
     pool: {
-      // Use unpooled (direct) connection for migrations and runtime
-      connectionString: process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL,
+      // Use pooled connection (PgBouncer) for serverless runtime
+      // Neon recommends DATABASE_URL (pooled) for Vercel serverless functions
+      connectionString: process.env.DATABASE_URL,
     },
     migrationDir: path.resolve(dirname, '../migrations'),
   }),
