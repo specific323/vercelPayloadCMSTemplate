@@ -12,7 +12,7 @@ export default async function HomePage() {
     },
     limit: 6,
     sort: '-publishedAt',
-  })
+  }).catch(() => ({ docs: [] }))
 
   return (
     <div>

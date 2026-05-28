@@ -28,15 +28,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config })
-  const posts = await payload.find({
-    collection: 'posts',
-    where: { status: { equals: 'published' } },
-    limit: 1000,
-    select: { slug: true },
-  })
-
-  return posts.docs.map((post) => ({ slug: post.slug }))
+  try {
+    const payload = await getPayload({ config })
+    const posts = await payload.find({
+      collection: 'posts',
+      where: { status: { equals: 'published' } },
+      limit: 1000,
+      select: { slug: true },
+    })
+    return posts.docs.map((post) => ({ slug: post.slug }))
+  } catch {
+    return []
+  }
 }
 
 export default async function PostPage({ params }: Props) {
