@@ -20,6 +20,10 @@ if [ ! -f ".env.local" ]; then
   fi
 fi
 
+# ── 產生 importMap（本地 dev 必要） ───────────────────────────
+echo "🗺️  產生 importMap..."
+NODE_OPTIONS=--no-deprecation pnpm payload generate:importMap
+
 # ── 啟動 ──────────────────────────────────────────────────────
 echo "🚀 啟動開發伺服器..."
 pnpm dev
