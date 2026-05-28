@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, Where } from 'payload'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -7,12 +7,12 @@ export const Posts: CollectionConfig = {
     defaultColumns: ['title', 'status', 'publishedAt', 'author'],
   },
   access: {
-    read: ({ req }) => {
+    read: ({ req }): boolean | Where => {
       if (req.user) return true
       return {
         and: [
-          { status: { equals: 'published' } },
-          { publishedAt: { less_than_equal: new Date().toISOString() } },
+          { status: { equals: 'published' } } as Where,
+          { publishedAt: { less_than_equal: new Date().toISOString() } } as Where,
         ],
       }
     },
