@@ -1,0 +1,13 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "regions": ["sin1"],
+  "crons": [
+    {
+      "path": "/api/cron/revalidate",
+      "schedule": "0 */6 * * *"
+    }
+  ]
+}
