@@ -26,6 +26,7 @@
       }
     ],
     "resolveJsonModule": true,
+    "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022"
